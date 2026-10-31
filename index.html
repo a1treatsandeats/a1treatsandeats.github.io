@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 Treats and Eats | Catering Menu</title>
+    <style>
+        :root {
+            --green: #2c4c38;       /* Matching her green catering pan section */
+            --pink: #f9e5e3;        /* Matching the soft pink headers */
+            --pink-text: #c05c65;   /* Deep rose color for text headers */
+            --bg: #fefcf9;          /* Cream white page background */
+            --dark: #2f2f2f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        /* Top Menu Graphic Section */
+        .promo-banner {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .promo-banner img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .order-btn-container {
+            text-align: center;
+            margin: 25px 0 35px 0;
+        }
+
+        /* Square Payment Button */
+        .btn-square {
+            display: inline-block;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 16px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s;
+        }
+
+        .btn-square:hover {
+            transform: translateY(-2px);
+            background-color: #222222;
+        }
+
+        /* Grid Layout for Menu Categories */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .category-box {
+            background: #ffffff;
+            border: 1px solid #f0e6df;
+            border-radius: 12px;
+            overflow: hidden;
+            padding-bottom: 15px;
+        }
+
+        .category-header {
+            background-color: var(--pink);
+            color: var(--pink-text);
+            text-align: center;
+            padding: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .item-list {
+            list-style: none;
+            padding: 15px;
+        }
+
+        .item-list li {
+            padding: 6px 0;
+            font-size: 0.95rem;
+            border-bottom: 1px dashed #f5ede6;
+        }
+
+        .item-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Pan Sizes Box */
+        .pan-sizes {
+            background-color: var(--green);
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .pan-sizes h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .pan-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 500px) {
+            .pan-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pan-card {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pan-title {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #f9e5e3;
+        }
+
+        /* Footer / Contact Details */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 1rem;
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Displays her beautiful image design at the top -->
+        <div class="promo-banner">
+            <img src="logo.png" alt="A1 Treats and Eats Catering Menu Design">
+        </div>
+
+        <!-- Call to Action Button connecting to your Square Account -->
+        <div class="order-btn-container">
+            <a href="https://square.link" target="_blank" class="btn-square">
+                Place Catering Deposit / Order
+            </a>
+        </div>
+
+        <!-- Interactive Text Fallback Menu Grid -->
+        <div class="menu-grid">
+            
+            <!-- Meat Options Box -->
+            <div class="category-box">
+                <div class="category-header">Meat Options</div>
+                <ul class="item-list">
+                    <li>Pernil</li>
+                    <li>Fried Wings / Turkey Wings</li>
+                    <li>BBQ Ribs / BBQ Chicken</li>
+                    <li>Pepper Steak / Fried Whiting</li>
+                    <li>Smothered Chicken</li>
+                    <li>Braised Lamb (Upcharge)</li>
+                    <li>Pot Roast (Mississippi Style)</li>
+                    <li>Stew Chicken (Puerto Rican Style)</li>
+                    <li>Oxtail (Upcharge)</li>
+                    <li>Fried Chicken Drum Sticks</li>
+                    <li>Fried / Pepper Shrimp</li>
+                    <li>Baked Salmon</li>
+                    <li>Stuffed Chicken</li>
+                </ul>
+            </div>
+
+            <!-- Side Options Box -->
+            <div class="category-box">
+                <div class="category-header">Side Options</div>
+                <ul class="item-list">
+                    <li>Baked Mac and Cheese</li>
+                    <li>Candied Yams</li>
+                    <li>Collard Greens with Smoked Turkey</li>
+                    <li>Steamed Broccoli (or Garlic Parmesan)</li>
+                    <li>Steamed Green Beans with Garlic & Butter</li>
+                    <li>Smothered Green Beans with Smoked Turkey</li>
+                    <li>Arroz con Gandules (Yellow Rice w/ Pigeon Peas)</li>
+                    <li>White Rice / Yellow Rice (Plain)</li>
+                    <li>Coconut Rice</li>
+                    <li>Creamy Garlic Mashed Potatoes</li>
+                    <li>Baked Beans with Ground Beef</li>
+                    <li>Grits</li>
+                </ul>
+            </div>
+
+            <!-- Salad & Empanada Box -->
+            <div class="category-box">
+                <div class="category-header">Salad & Empanada Options</div>
+                <ul class="item-list">
+                    <li><strong>Salads:</strong> Potato, Tuna Mac, Cesar, Garden, Greek, Chefs</li>
+                    <li><strong>Empanadas:</strong> Beef, Chicken, Pernil, Buffalo Chicken, Beef & Potato, Loaded Potato</li>
+                </ul>
+            </div>
+
+            <!-- Breakfast Options Box -->
+            <div class="category-box">
+                <div class="category-header">Breakfast Options</div>
+                <ul class="item-list">
+                    <li>Eggs (Cheese, Peppers, Spinach, or Onion)</li>
+                    <li>Home Fries with Peppers and Onion</li>
+                    <li>Turkey or Pork Sausage / Bacon</li>
+                    <li>Homemade Belgian Waffles</li>
+                    <li>Hawaiian Roll French Toast Bites</li>
+                    <li>Grits / Breakfast Sliders</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Catering Pan Dimensions Layout Section -->
+        <div class="pan-sizes">
+            <h3>Catering Pan Sizes</h3>
+            <div class="pan-grid">
+                <div class="pan-card">
+                    <p class="pan-title">Full Size Pan</p>
+                    <p>20–25 People</p>
+                </div>
+                <div class="pan-card">
+                    <p class="pan-title">Half Size Pan</p>
+                    <p>10–12 People</p>
+                </div>
+                <div class="pan-card">
+                    <p class="pan-title">Quarter Size Pan</p>
+                    <p>5–8 People</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Contact Info directly matching the card layout -->
+        <footer>
+            <p>📸 Instagram: @A1TREATSANDEATS</p>
+            <p>📞 Phone: (631) 741-3038</p>
+            <p style="margin-top: 10px; font-size: 0.85rem; color: #aaa; font-weight: normal;">
+                Let's Cater Your Next Event! ♥
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
