@@ -3,295 +3,685 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A1 Treats and Eats | Catering Menu</title>
+    <title>A1 Treats and Eats | Interactive Menu & Catering</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandGreen: '#2c4c38',
+                        brandGreenDark: '#1e3527',
+                        brandPink: '#f9e5e3',
+                        brandRose: '#c05c65',
+                        brandBg: '#fefcf9',
+                        brandDark: '#2f2f2f',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Phosphor Icons for SVG UI Elements -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
-        :root {
-            --green: #2c4c38;       /* Matching her green catering pan section */
-            --pink: #f9e5e3;        /* Matching the soft pink headers */
-            --pink-text: #c05c65;   /* Deep rose color for text headers */
-            --bg: #fefcf9;          /* Cream white page background */
-            --dark: #2f2f2f;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--dark);
-            line-height: 1.6;
-            padding: 15px;
+            background-color: #fefcf9;
+            color: #2f2f2f;
         }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            background: #ffffff;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        /* Top Menu Graphic Section */
-        .promo-banner {
-            text-align: center;
-            margin-bottom: 30px;
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
         }
-
-        .promo-banner img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        ::-webkit-scrollbar-thumb {
+            background: #c05c65;
+            border-radius: 4px;
         }
-
-        .order-btn-container {
-            text-align: center;
-            margin: 25px 0 35px 0;
-        }
-
-        /* Square Payment Button */
-        .btn-square {
-            display: inline-block;
-            background-color: #000000;
-            color: #ffffff;
-            padding: 16px 40px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: transform 0.2s;
-        }
-
-        .btn-square:hover {
-            transform: translateY(-2px);
-            background-color: #222222;
-        }
-
-        /* Grid Layout for Menu Categories */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
-
-        @media (max-width: 600px) {
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .category-box {
-            background: #ffffff;
-            border: 1px solid #f0e6df;
-            border-radius: 12px;
-            overflow: hidden;
-            padding-bottom: 15px;
-        }
-
-        .category-header {
-            background-color: var(--pink);
-            color: var(--pink-text);
-            text-align: center;
-            padding: 10px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .item-list {
-            list-style: none;
-            padding: 15px;
-        }
-
-        .item-list li {
-            padding: 6px 0;
-            font-size: 0.95rem;
-            border-bottom: 1px dashed #f5ede6;
-        }
-
-        .item-list li:last-child {
-            border-bottom: none;
-        }
-
-        /* Pan Sizes Box */
-        .pan-sizes {
-            background-color: var(--green);
-            color: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .pan-sizes h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
-
-        .pan-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 15px;
-            font-size: 0.85rem;
-        }
-
-        @media (max-width: 500px) {
-            .pan-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .pan-card {
-            background: rgba(255,255,255,0.1);
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        .pan-title {
-            font-weight: bold;
-            font-size: 1rem;
-            margin-bottom: 5px;
-            color: #f9e5e3;
-        }
-
-        /* Footer / Contact Details */
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            font-size: 1rem;
-            color: var(--green);
-            font-weight: 600;
-        }
-
-        footer p {
-            margin: 5px 0;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a04851;
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col font-sans antialiased text-brandDark">
 
-    <div class="container">
+    <!-- Top Navigation Bar & Admin Controls -->
+    <header class="bg-white border-b border-rose-100 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-brandPink p-2 rounded-full text-brandRose font-bold text-xl flex items-center justify-center w-10 h-10 border border-rose-200 shadow-sm">
+                    A1
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-brandGreen">A1 Treats & Eats</h1>
+                    <p class="text-xs text-gray-500 hidden sm:block">Puerto Rican & Soul Food Catering • Long Island, NY</p>
+                </div>
+            </div>
+
+            <!-- Header Actions -->
+            <div class="flex items-center space-x-3">
+                <button id="toggleAdminBtn" onclick="openAdminModal()" class="flex items-center space-x-1.5 bg-brandPink hover:bg-rose-200 text-brandRose px-3.5 py-2 rounded-lg text-sm font-semibold transition shadow-sm border border-rose-200">
+                    <i class="ph ph-pencil-line text-lg"></i>
+                    <span class="hidden md:inline">Edit Weekly Special</span>
+                    <span class="md:hidden">Edit Special</span>
+                </button>
+                
+                <a href="https://pizarro-services-inc.square.site/" target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-sm font-bold transition shadow flex items-center space-x-2">
+                    <i class="ph ph-shopping-bag text-lg"></i>
+                    <span class="hidden sm:inline">Order / Deposit</span>
+                    <span class="sm:hidden">Order</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
         
-        <!-- Displays her beautiful image design at the top -->
-        <div class="promo-banner">
-            <img src="logo.png" alt="A1 Treats and Eats Catering Menu Design">
+        <!-- Welcome & Announcement Banner -->
+        <div class="mb-6 bg-gradient-to-r from-brandGreen to-brandGreenDark text-white p-4 sm:p-6 rounded-2xl shadow-lg relative overflow-hidden flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="z-10 text-center md:text-left">
+                <span class="bg-rose-400/30 text-rose-100 text-xs uppercase tracking-widest font-bold px-3 py-1 rounded-full border border-rose-200/30">Fresh & Authentic</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Savor the Flavor of Puerto Rico & Soul Food</h2>
+                <p class="text-emerald-100 text-sm mt-1 max-w-2xl">Order your weekly dinner platters or book catering for your next family event, party, or corporate function!</p>
+            </div>
+            <div class="z-10 flex-shrink-0 flex gap-2">
+                <a href="tel:6317413038" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+                    <i class="ph ph-phone text-lg"></i> (631) 741-3038
+                </a>
+            </div>
+            <!-- Background Decorative Shape -->
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/5 rounded-full blur-2xl"></div>
         </div>
 
-        <!-- Call to Action Button connecting to your Square Account -->
-        <div class="order-btn-container">
-            <a href="https://pizarro-services-inc.square.site/" target="_blank" class="btn-square">
-                Place Catering Deposit / Order
-            </a>
-        </div>
-
-        <!-- Interactive Text Fallback Menu Grid -->
-        <div class="menu-grid">
+        <!-- Side-by-Side Main Layout Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <!-- Meat Options Box -->
-            <div class="category-box">
-                <div class="category-header">Meat Options</div>
-                <ul class="item-list">
-                    <li>Pernil</li>
-                    <li>Fried Wings / Turkey Wings</li>
-                    <li>BBQ Ribs / BBQ Chicken</li>
-                    <li>Pepper Steak / Fried Whiting</li>
-                    <li>Smothered Chicken</li>
-                    <li>Braised Lamb (Upcharge)</li>
-                    <li>Pot Roast (Mississippi Style)</li>
-                    <li>Stew Chicken (Puerto Rican Style)</li>
-                    <li>Oxtail (Upcharge)</li>
-                    <li>Fried Chicken Drum Sticks</li>
-                    <li>Fried / Pepper Shrimp</li>
-                    <li>Baked Salmon</li>
-                    <li>Stuffed Chicken</li>
-                </ul>
-            </div>
+            <!-- LEFT COLUMN: Weekly Special / Sunday's Menu (5/12 width on LG) -->
+            <section class="lg:col-span-5 bg-white border-2 border-brandRose/30 rounded-2xl shadow-md overflow-hidden relative">
+                <!-- Special Badge Header -->
+                <div class="bg-brandPink border-b border-rose-200 p-4 text-center relative">
+                    <div class="inline-flex items-center space-x-2 bg-brandRose text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-1 shadow-sm">
+                        <i class="ph ph-sparkle-fill"></i>
+                        <span>Featured Menu</span>
+                    </div>
+                    <h2 id="displayTitle" class="text-2xl font-black text-brandRose uppercase tracking-wide">Sunday's Menu</h2>
+                    <p class="text-xs text-rose-700 mt-1 font-medium">Limited Availability • Freshly Prepared</p>
+                    
+                    <!-- Quick Edit Trigger in Section Header -->
+                    <button onclick="openAdminModal()" title="Edit Special Menu" class="absolute top-4 right-4 text-brandRose hover:text-rose-800 p-1 rounded-lg hover:bg-rose-200/50 transition">
+                        <i class="ph ph-pencil-simple text-xl"></i>
+                    </button>
+                </div>
 
-            <!-- Side Options Box -->
-            <div class="category-box">
-                <div class="category-header">Side Options</div>
-                <ul class="item-list">
-                    <li>Baked Mac and Cheese</li>
-                    <li>Candied Yams</li>
-                    <li>Collard Greens with Smoked Turkey</li>
-                    <li>Steamed Broccoli (or Garlic Parmesan)</li>
-                    <li>Steamed Green Beans with Garlic & Butter</li>
-                    <li>Smothered Green Beans with Smoked Turkey</li>
-                    <li>Arroz con Gandules (Yellow Rice w/ Pigeon Peas)</li>
-                    <li>White Rice / Yellow Rice (Plain)</li>
-                    <li>Coconut Rice</li>
-                    <li>Creamy Garlic Mashed Potatoes</li>
-                    <li>Baked Beans with Ground Beef</li>
-                    <li>Grits</li>
-                </ul>
-            </div>
+                <div class="p-5 sm:p-6 space-y-6">
+                    <!-- Pricing Banner Box -->
+                    <div class="bg-gradient-to-r from-rose-50 via-pink-50 to-rose-50 border border-rose-200 rounded-xl p-3 text-center shadow-sm">
+                        <div class="flex items-center justify-around flex-wrap gap-2 text-brandRose font-bold text-sm">
+                            <div class="flex items-center gap-1">
+                                <i class="ph ph-cooking-pot text-lg"></i>
+                                <span id="displayPlatterPrice">$20 Platter</span>
+                            </div>
+                            <span class="text-rose-300">•</span>
+                            <div class="flex items-center gap-1">
+                                <i class="ph ph-bread text-lg"></i>
+                                <span id="displayEmpanadaPrice">$3 Empanadas</span>
+                            </div>
+                            <span class="text-rose-300">•</span>
+                            <div class="flex items-center gap-1">
+                                <i class="ph ph-bowl-food text-lg"></i>
+                                <span id="displaySidePrice">$3 Extra Side</span>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- Salad & Empanada Box -->
-            <div class="category-box">
-                <div class="category-header">Salad & Empanada Options</div>
-                <ul class="item-list">
-                    <li><strong>Salads:</strong> Potato, Tuna Mac, Cesar, Garden, Greek, Chefs</li>
-                    <li><strong>Empanadas:</strong> Beef, Chicken, Pernil, Buffalo Chicken, Beef & Potato, Loaded Potato</li>
-                </ul>
-            </div>
+                    <!-- Proteins Section -->
+                    <div>
+                        <div class="flex items-center space-x-2 border-b border-rose-100 pb-2 mb-3">
+                            <i class="ph ph-flame text-brandRose text-xl"></i>
+                            <h3 class="font-bold text-brandGreen uppercase text-sm tracking-wider">Protein Options</h3>
+                        </div>
+                        <ul id="displayProteins" class="space-y-3 text-sm text-gray-700">
+                            <!-- Populated via JS with thumbnail image links -->
+                        </ul>
+                    </div>
 
-            <!-- Breakfast Options Box -->
-            <div class="category-box">
-                <div class="category-header">Breakfast Options</div>
-                <ul class="item-list">
-                    <li>Eggs (Cheese, Peppers, Spinach, or Onion)</li>
-                    <li>Home Fries with Peppers and Onion</li>
-                    <li>Turkey or Pork Sausage / Bacon</li>
-                    <li>Homemade Belgian Waffles</li>
-                    <li>Hawaiian Roll French Toast Bites</li>
-                    <li>Grits / Breakfast Sliders</li>
-                </ul>
-            </div>
+                    <!-- Sides Section -->
+                    <div>
+                        <div class="flex items-center space-x-2 border-b border-rose-100 pb-2 mb-3">
+                            <i class="ph ph-bowl-food text-brandRose text-xl"></i>
+                            <h3 class="font-bold text-brandGreen uppercase text-sm tracking-wider">Sides</h3>
+                        </div>
+                        <ul id="displaySides" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
+                            <!-- Populated via JS with thumbnail image links -->
+                        </ul>
+                    </div>
 
+                    <!-- Pastelitos Section -->
+                    <div>
+                        <div class="flex items-center space-x-2 border-b border-rose-100 pb-2 mb-3">
+                            <i class="ph ph-cookie text-brandRose text-xl"></i>
+                            <h3 class="font-bold text-brandGreen uppercase text-sm tracking-wider">Pastelitos / Empanadas</h3>
+                        </div>
+                        <ul id="displayPastelitos" class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-gray-700">
+                            <!-- Populated via JS with thumbnail image links -->
+                        </ul>
+                    </div>
+
+                    <!-- Sides Section -->
+                    <div>
+                        <div class="flex items-center space-x-2 border-b border-rose-100 pb-2 mb-3">
+                            <i class="ph ph-bowl-food text-brandRose text-xl"></i>
+                            <h3 class="font-bold text-brandGreen uppercase text-sm tracking-wider">Sides</h3>
+                        </div>
+                        <ul id="displaySides" class="grid grid-cols-2 gap-2 text-sm text-gray-700">
+                            <!-- Populated via JS -->
+                        </ul>
+                    </div>
+
+                    <!-- Pastelitos Section -->
+                    <div>
+                        <div class="flex items-center space-x-2 border-b border-rose-100 pb-2 mb-3">
+                            <i class="ph ph-cookie text-brandRose text-xl"></i>
+                            <h3 class="font-bold text-brandGreen uppercase text-sm tracking-wider">Pastelitos / Empanadas</h3>
+                        </div>
+                        <ul id="displayPastelitos" class="flex flex-wrap gap-2 text-sm text-gray-700">
+                            <!-- Populated via JS -->
+                        </ul>
+                    </div>
+
+                    <!-- Order Info Box -->
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 text-xs space-y-2">
+                        <div class="flex justify-between items-center text-gray-600">
+                            <span class="font-semibold flex items-center gap-1">
+                                <i class="ph ph-clock text-brandRose text-base"></i> Order Window:
+                            </span>
+                            <span id="displayOrderWindow" class="font-bold text-gray-800">Mon - Fri 6PM</span>
+                        </div>
+                        <div class="flex justify-between items-center text-gray-600">
+                            <span class="font-semibold flex items-center gap-1">
+                                <i class="ph ph-device-mobile text-brandRose text-base"></i> How to Order:
+                            </span>
+                            <span id="displayContact" class="font-bold text-brandRose">DM or Text (631) 741-3038</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <a href="sms:6317413038" class="w-full bg-brandRose hover:bg-rose-700 text-white font-bold py-3 px-4 rounded-xl transition text-center flex items-center justify-center gap-2 shadow">
+                        <i class="ph ph-chat-circle-dots text-xl"></i> Text Order Now (631) 741-3038
+                    </a>
+                </div>
+            </section>
+
+            <!-- RIGHT COLUMN: Full Catering Menu & Pan Dimensions (7/12 width on LG) -->
+            <section class="lg:col-span-7 space-y-8">
+                
+                <!-- Main Catering Categories Grid -->
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h2 class="text-2xl font-bold text-brandGreen">Full Catering Menu</h2>
+                            <p class="text-xs text-gray-500">Pick options to build your customized event tray</p>
+                        </div>
+                        <span class="bg-brandGreen/10 text-brandGreen font-semibold text-xs px-3 py-1 rounded-full">Pan Catering Available</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        
+                        <!-- Meats Card -->
+                        <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+                            <div class="bg-brandPink px-4 py-2.5 font-bold text-brandRose border-b border-rose-100 flex justify-between items-center">
+                                <span>Meat Options</span>
+                                <i class="ph ph-cooking-pot text-lg"></i>
+                            </div>
+                            <ul class="p-4 space-y-1.5 text-xs text-gray-700 divide-y divide-gray-100">
+                                <li class="pt-1 flex items-center justify-between"><span>Pernil (Pulled Pork)</span> <span class="text-emerald-700 font-medium">Favorite</span></li>
+                                <li class="pt-1">Fried Wings / Turkey Wings</li>
+                                <li class="pt-1">BBQ Ribs / BBQ Chicken</li>
+                                <li class="pt-1">Pepper Steak / Fried Whiting</li>
+                                <li class="pt-1">Smothered Chicken</li>
+                                <li class="pt-1 flex items-center justify-between text-amber-700"><span>Braised Lamb</span> <span class="text-[10px] bg-amber-100 px-1.5 py-0.5 rounded font-semibold">Upcharge</span></li>
+                                <li class="pt-1">Pot Roast (Mississippi Style)</li>
+                                <li class="pt-1">Stew Chicken (PR Style)</li>
+                                <li class="pt-1 flex items-center justify-between text-amber-700"><span>Oxtail</span> <span class="text-[10px] bg-amber-100 px-1.5 py-0.5 rounded font-semibold">Upcharge</span></li>
+                                <li class="pt-1">Fried Chicken Drum Sticks</li>
+                                <li class="pt-1">Fried / Pepper Shrimp</li>
+                                <li class="pt-1">Baked Salmon</li>
+                                <li class="pt-1">Stuffed Chicken</li>
+                            </ul>
+                        </div>
+
+                        <!-- Sides Card -->
+                        <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+                            <div class="bg-brandPink px-4 py-2.5 font-bold text-brandRose border-b border-rose-100 flex justify-between items-center">
+                                <span>Side Options</span>
+                                <i class="ph ph-bowl-food text-lg"></i>
+                            </div>
+                            <ul class="p-4 space-y-1.5 text-xs text-gray-700 divide-y divide-gray-100">
+                                <li class="pt-1 font-semibold text-brandGreen">Baked Mac and Cheese</li>
+                                <li class="pt-1">Candied Yams</li>
+                                <li class="pt-1">Collard Greens w/ Smoked Turkey</li>
+                                <li class="pt-1">Steamed Broccoli (Garlic Parm)</li>
+                                <li class="pt-1">Green Beans w/ Garlic & Butter</li>
+                                <li class="pt-1">Smothered Green Beans w/ Smoked Turkey</li>
+                                <li class="pt-1 font-semibold text-brandGreen">Arroz con Gandules (Yellow Rice)</li>
+                                <li class="pt-1">White Rice / Yellow Rice (Plain)</li>
+                                <li class="pt-1">Coconut Rice</li>
+                                <li class="pt-1">Creamy Garlic Mashed Potatoes</li>
+                                <li class="pt-1">Baked Beans with Ground Beef</li>
+                                <li class="pt-1">Grits</li>
+                            </ul>
+                        </div>
+
+                        <!-- Salads & Empanadas Card -->
+                        <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+                            <div class="bg-brandPink px-4 py-2.5 font-bold text-brandRose border-b border-rose-100 flex justify-between items-center">
+                                <span>Salads & Empanadas</span>
+                                <i class="ph ph-cookie text-lg"></i>
+                            </div>
+                            <div class="p-4 space-y-3 text-xs">
+                                <div>
+                                    <span class="font-bold text-brandGreen block mb-1 uppercase text-[11px] tracking-wider">Salad Trays:</span>
+                                    <p class="text-gray-600 leading-relaxed">Potato Salad, Tuna Macaroni, Caesar, Garden Salad, Greek Salad, Chef's Special</p>
+                                </div>
+                                <hr class="border-gray-100">
+                                <div>
+                                    <span class="font-bold text-brandGreen block mb-1 uppercase text-[11px] tracking-wider">Empanada Flavors:</span>
+                                    <p class="text-gray-600 leading-relaxed">Beef, Chicken, Pernil, Buffalo Chicken, Beef & Potato, Loaded Potato</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Breakfast Options Card -->
+                        <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+                            <div class="bg-brandPink px-4 py-2.5 font-bold text-brandRose border-b border-rose-100 flex justify-between items-center">
+                                <span>Breakfast Options</span>
+                                <i class="ph ph-coffee text-lg"></i>
+                            </div>
+                            <ul class="p-4 space-y-1.5 text-xs text-gray-700 divide-y divide-gray-100">
+                                <li class="pt-1">Scrambled Eggs (Cheese, Peppers, Spinach, Onion)</li>
+                                <li class="pt-1">Home Fries with Peppers & Onions</li>
+                                <li class="pt-1">Turkey / Pork Sausage or Bacon</li>
+                                <li class="pt-1">Homemade Belgian Waffles</li>
+                                <li class="pt-1">Hawaiian Roll French Toast Bites</li>
+                                <li class="pt-1">Creamy Grits / Breakfast Sliders</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Catering Pan Sizes Section -->
+                <div class="bg-brandGreen text-white p-6 rounded-2xl shadow-md">
+                    <div class="text-center mb-5">
+                        <h3 class="text-xl font-bold tracking-wide uppercase">Catering Pan Dimensions & Servings</h3>
+                        <p class="text-xs text-emerald-200 mt-0.5">Select the right size for your event guest count</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-white/10 border border-white/20 p-4 rounded-xl text-center backdrop-blur-sm">
+                            <div class="text-pink-200 font-bold text-lg mb-1">Full Size Pan</div>
+                            <div class="text-2xl font-black text-white">20–25</div>
+                            <div class="text-xs text-emerald-200">People Served</div>
+                        </div>
+                        <div class="bg-white/10 border border-white/20 p-4 rounded-xl text-center backdrop-blur-sm">
+                            <div class="text-pink-200 font-bold text-lg mb-1">Half Size Pan</div>
+                            <div class="text-2xl font-black text-white">10–12</div>
+                            <div class="text-xs text-emerald-200">People Served</div>
+                        </div>
+                        <div class="bg-white/10 border border-white/20 p-4 rounded-xl text-center backdrop-blur-sm">
+                            <div class="text-pink-200 font-bold text-lg mb-1">Quarter Size Pan</div>
+                            <div class="text-2xl font-black text-white">5–8</div>
+                            <div class="text-xs text-emerald-200">People Served</div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
         </div>
+    </main>
 
-        <!-- Catering Pan Dimensions Layout Section -->
-        <div class="pan-sizes">
-            <h3>Catering Pan Sizes</h3>
-            <div class="pan-grid">
-                <div class="pan-card">
-                    <p class="pan-title">Full Size Pan</p>
-                    <p>20–25 People</p>
-                </div>
-                <div class="pan-card">
-                    <p class="pan-title">Half Size Pan</p>
-                    <p>10–12 People</p>
-                </div>
-                <div class="pan-card">
-                    <p class="pan-title">Quarter Size Pan</p>
-                    <p>5–8 People</p>
-                </div>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-3">
+            <div class="flex justify-center items-center space-x-6 text-brandGreen font-medium text-sm">
+                <a href="https://www.instagram.com/a1treatsandeats/" target="_blank" rel="noopener noreferrer" class="hover:text-brandRose transition flex items-center gap-1.5">
+                    <i class="ph ph-instagram-logo text-xl"></i> @A1TREATSANDEATS
+                </a>
+                <span>•</span>
+                <a href="tel:6317413038" class="hover:text-brandRose transition flex items-center gap-1.5">
+                    <i class="ph ph-phone text-xl"></i> (631) 741-3038
+                </a>
             </div>
+            <p class="text-xs text-gray-400">Let's Cater Your Next Event! ♥ • All Rights Reserved</p>
         </div>
+    </footer>
 
-        <!-- Footer Contact Info directly matching the card layout -->
-        <footer>
-            <p>📸 Instagram: <a href="https://www.instagram.com/a1treatsandeats/" target="_blank" style="color: inherit; text-decoration: underline;">@A1TREATSANDEATS</a></p>
+    <!-- EDIT / ADMIN MODAL FOR WEEKLY SPECIAL -->
+    <div id="adminModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-xl w-full shadow-2xl overflow-hidden my-8 transform transition-all">
+            <!-- Modal Header -->
+            <div class="bg-brandPink p-4 border-b border-rose-200 flex justify-between items-center">
+                <div class="flex items-center space-x-2 text-brandRose">
+                    <i class="ph ph-pencil-line text-xl"></i>
+                    <h3 class="font-bold text-lg">Update Weekly Special</h3>
+                </div>
+                <button onclick="closeAdminModal()" class="text-gray-400 hover:text-gray-600 p-1 rounded-lg">
+                    <i class="ph ph-x text-xl"></i>
+                </button>
+            </div>
 
-            <p>📞 Phone: (631) 741-3038</p>
-            <p style="margin-top: 10px; font-size: 0.85rem; color: #aaa; font-weight: normal;">
-                Let's Cater Your Next Event! ♥
-            </p>
-        </footer>
+            <!-- Modal Form -->
+            <form id="specialForm" onsubmit="saveSpecialMenu(event)" class="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
+                <!-- Title -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Menu Title</label>
+                    <input type="text" id="inputTitle" required class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none" placeholder="e.g. Sunday's Menu">
+                </div>
 
+                <!-- Pricing Grid -->
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Platter ($)</label>
+                        <input type="text" id="inputPlatterPrice" required class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none" placeholder="$20 Platter">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Empanada ($)</label>
+                        <input type="text" id="inputEmpanadaPrice" required class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none" placeholder="$3 Empanadas">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Extra Side ($)</label>
+                        <input type="text" id="inputSidePrice" required class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none" placeholder="$3 Extra Side">
+                    </div>
+                </div>
+
+                <!-- Proteins (One per line) -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Proteins (Format: Name | Description | image_filename.jpg)</label>
+                    <textarea id="inputProteins" rows="4" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none font-mono" placeholder="Pernil | Pulled Pork Shoulder | pernil.jpg&#10;Chicharrón de pollo | Fried Chicken Chunks | chicharron.jpg"></textarea>
+                </div>
+
+                <!-- Sides (One per line) -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Sides (Format: Name | image_filename.jpg)</label>
+                    <textarea id="inputSides" rows="4" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none font-mono" placeholder="Arroz Con Gandules | arroz-con-gandules.jpg&#10;White Rice | white-rice.jpg"></textarea>
+                </div>
+
+                <!-- Pastelitos (One per line) -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Pastelitos (Format: Name | image_filename.jpg)</label>
+                    <textarea id="inputPastelitos" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none font-mono" placeholder="Beef | beef-pastelito.jpg&#10;Chicken | chicken-pastelito.jpg"></textarea>
+                </div>
+
+                <!-- Sides (One per line) -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Sides (One item per line)</label>
+                    <textarea id="inputSides" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none font-mono" placeholder="Arroz Con Gandules&#10;White Rice&#10;Yuca Con Mojo"></textarea>
+                </div>
+
+                <!-- Pastelitos (One per line) -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Pastelitos (One item per line)</label>
+                    <textarea id="inputPastelitos" rows="2" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none font-mono" placeholder="Beef&#10;Chicken&#10;Pernil (Request Cheese)"></textarea>
+                </div>
+
+                <!-- Ordering Window & Contact -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Ordering Window</label>
+                        <input type="text" id="inputOrderWindow" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none" placeholder="Mon - Fri 6PM">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Contact Info</label>
+                        <input type="text" id="inputContact" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none" placeholder="DM or Text (631) 741-3038">
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="pt-4 border-t border-gray-200 flex justify-between items-center">
+                    <button type="button" onclick="resetDefaultMenu()" class="text-xs text-gray-500 hover:text-rose-600 underline">
+                        Reset to Default Sunday Menu
+                    </button>
+                    <div class="flex space-x-2">
+                        <button type="button" onclick="closeAdminModal()" class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-50">Cancel</button>
+                        <button type="submit" class="px-5 py-2 bg-brandRose hover:bg-rose-700 text-white font-bold rounded-lg text-sm shadow">Save Changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
-</body>
-</html>
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-brandGreen text-white px-4 py-3 rounded-xl shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2 z-50">
+        <i class="ph ph-check-circle text-xl text-emerald-300"></i>
+        <span id="toastMsg" class="text-sm font-medium">Menu updated successfully!</span>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Initial Default Data with Image Links
+        const DEFAULT_MENU = {
+            title: "Sunday's Menu",
+            platterPrice: "$20 Platter",
+            empanadaPrice: "$3 Empanadas",
+            sidePrice: "$3 Extra Side",
+            proteins: [
+                { name: "Pernil", desc: "Pulled Pork Shoulder", img: "pernil.jpg" },
+                { name: "Chicharrón de pollo", desc: "Fried Chicken Chunks", img: "chicharron-de-pollo.jpg" },
+                { name: "Pastelón", desc: "Plantain lasagna with ground beef", img: "pastelon.jpg" },
+                { name: "Burrito", desc: "Pernil, Arroz con gandules, Maduro, Pepper Jack & Creamy Softito Sauce", img: "burrito.jpg" }
+            ],
+            sides: [
+                { name: "Arroz Con Gandules", img: "arroz-con-gandules.jpg" },
+                { name: "White Rice", img: "white-rice.jpg" },
+                { name: "Yuca Con Mojo", img: "yuca-con-mojo.jpg" },
+                { name: "Potato Salad", img: "potato-salad.jpg" }
+            ],
+            pastelitos: [
+                { name: "Beef", img: "pastelito-beef.jpg" },
+                { name: "Chicken", img: "pastelito-chicken.jpg" },
+                { name: "Pernil (Request Cheese)", img: "pastelito-pernil.jpg" }
+            ],
+            orderWindow: "Mon - Fri 6PM",
+            contact: "DM or Text (631) 741-3038"
+        };
+
+        // State Variable
+        let currentMenu = {};
+
+        // Load Menu from LocalStorage or Default
+        function loadMenu() {
+            const savedData = localStorage.getItem('a1_weekly_special');
+            if (savedData) {
+                try {
+                    currentMenu = JSON.parse(savedData);
+                } catch (e) {
+                    currentMenu = { ...DEFAULT_MENU };
+                }
+            } else {
+                currentMenu = { ...DEFAULT_MENU };
+            }
+            renderMenu();
+        }
+
+        // Render Data into DOM
+        function renderMenu() {
+            document.getElementById('displayTitle').innerText = currentMenu.title || "Sunday's Menu";
+            document.getElementById('displayPlatterPrice').innerText = currentMenu.platterPrice || "$20 Platter";
+            document.getElementById('displayEmpanadaPrice').innerText = currentMenu.empanadaPrice || "$3 Empanadas";
+            document.getElementById('displaySidePrice').innerText = currentMenu.sidePrice || "$3 Extra Side";
+            document.getElementById('displayOrderWindow').innerText = currentMenu.orderWindow || "Mon - Fri 6PM";
+            document.getElementById('displayContact').innerText = currentMenu.contact || "DM or Text (631) 741-3038";
+
+            // Helper to generate fallback placeholder UI when image isn't loaded yet
+            const getImgHtml = (src, alt) => {
+                const placeholder = `https://placehold.co/120x120/f9e5e3/c05c65?text=${encodeURIComponent(alt)}`;
+                return `<img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" onerror="this.onerror=null;this.src='${placeholder}';" class="w-14 h-14 object-cover rounded-lg border border-rose-200 flex-shrink-0 shadow-sm">`;
+            };
+
+            // Render Proteins
+            const proteinsContainer = document.getElementById('displayProteins');
+            proteinsContainer.innerHTML = '';
+            (currentMenu.proteins || []).forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'bg-rose-50/60 p-2.5 rounded-xl border border-rose-100/70 flex items-center space-x-3 shadow-sm';
+                li.innerHTML = `
+                    ${getImgHtml(item.img || 'protein.jpg', item.name)}
+                    <div>
+                        <div class="font-bold text-brandGreen leading-tight">${escapeHtml(item.name)}</div>
+                        ${item.desc ? `<div class="text-xs text-gray-500 mt-0.5">${escapeHtml(item.desc)}</div>` : ''}
+                    </div>
+                `;
+                proteinsContainer.appendChild(li);
+            });
+
+            // Render Sides
+            const sidesContainer = document.getElementById('displaySides');
+            sidesContainer.innerHTML = '';
+            (currentMenu.sides || []).forEach(side => {
+                const sideName = typeof side === 'object' ? side.name : side;
+                const sideImg = typeof side === 'object' ? side.img : `${sideName.toLowerCase().replace(/\s+/g, '-')}.jpg`;
+                const li = document.createElement('li');
+                li.className = 'bg-gray-50 p-2 rounded-xl border border-gray-200/70 flex items-center space-x-2.5';
+                li.innerHTML = `
+                    ${getImgHtml(sideImg, sideName)}
+                    <span class="font-semibold text-xs text-gray-800">${escapeHtml(sideName)}</span>
+                `;
+                sidesContainer.appendChild(li);
+            });
+
+            // Render Pastelitos
+            const pastelitosContainer = document.getElementById('displayPastelitos');
+            pastelitosContainer.innerHTML = '';
+            (currentMenu.pastelitos || []).forEach(pas => {
+                const pasName = typeof pas === 'object' ? pas.name : pas;
+                const pasImg = typeof pas === 'object' ? pas.img : `pastelito-${pasName.toLowerCase().replace(/\s+/g, '-')}.jpg`;
+                const li = document.createElement('li');
+                li.className = 'bg-rose-50/80 p-2 rounded-xl border border-rose-200 flex items-center space-x-2.5';
+                li.innerHTML = `
+                    ${getImgHtml(pasImg, pasName)}
+                    <span class="font-bold text-xs text-brandRose">${escapeHtml(pasName)}</span>
+                `;
+                pastelitosContainer.appendChild(li);
+            });
+        }
+
+        // Admin Modal Actions
+        function openAdminModal() {
+            document.getElementById('inputTitle').value = currentMenu.title || '';
+            document.getElementById('inputPlatterPrice').value = currentMenu.platterPrice || '';
+            document.getElementById('inputEmpanadaPrice').value = currentMenu.empanadaPrice || '';
+            document.getElementById('inputSidePrice').value = currentMenu.sidePrice || '';
+            document.getElementById('inputOrderWindow').value = currentMenu.orderWindow || '';
+            document.getElementById('inputContact').value = currentMenu.contact || '';
+
+            // Format proteins back into editable lines
+            document.getElementById('inputProteins').value = (currentMenu.proteins || [])
+                .map(p => `${p.name} | ${p.desc || ''} | ${p.img || ''}`)
+                .join('\n');
+
+            // Format sides back into editable lines
+            document.getElementById('inputSides').value = (currentMenu.sides || [])
+                .map(s => typeof s === 'object' ? `${s.name} | ${s.img || ''}` : `${s} | ${s.toLowerCase().replace(/\s+/g, '-')}.jpg`)
+                .join('\n');
+
+            // Format pastelitos back into editable lines
+            document.getElementById('inputPastelitos').value = (currentMenu.pastelitos || [])
+                .map(p => typeof p === 'object' ? `${p.name} | ${p.img || ''}` : `${p} | pastelito-${p.toLowerCase().replace(/\s+/g, '-')}.jpg`)
+                .join('\n');
+
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        // Save Form Data
+        function saveSpecialMenu(e) {
+            e.preventDefault();
+
+            // Parse Proteins
+            const rawProteins = document.getElementById('inputProteins').value.trim().split('\n');
+            const parsedProteins = rawProteins.filter(line => line.trim()).map(line => {
+                const parts = line.split('|');
+                return {
+                    name: parts[0] ? parts[0].trim() : '',
+                    desc: parts[1] ? parts[1].trim() : '',
+                    img: parts[2] ? parts[2].trim() : (parts[0] ? `${parts[0].trim().toLowerCase().replace(/\s+/g, '-')}.jpg` : 'food.jpg')
+                };
+            });
+
+            // Parse Sides
+            const rawSides = document.getElementById('inputSides').value.trim().split('\n');
+            const parsedSides = rawSides.filter(line => line.trim()).map(line => {
+                const parts = line.split('|');
+                return {
+                    name: parts[0] ? parts[0].trim() : '',
+                    img: parts[1] ? parts[1].trim() : (parts[0] ? `${parts[0].trim().toLowerCase().replace(/\s+/g, '-')}.jpg` : 'side.jpg')
+                };
+            });
+
+            // Parse Pastelitos
+            const rawPastelitos = document.getElementById('inputPastelitos').value.trim().split('\n');
+            const parsedPastelitos = rawPastelitos.filter(line => line.trim()).map(line => {
+                const parts = line.split('|');
+                return {
+                    name: parts[0] ? parts[0].trim() : '',
+                    img: parts[1] ? parts[1].trim() : (parts[0] ? `pastelito-${parts[0].trim().toLowerCase().replace(/\s+/g, '-')}.jpg` : 'pastelito.jpg')
+                };
+            });
+
+            currentMenu = {
+                title: document.getElementById('inputTitle').value.trim(),
+                platterPrice: document.getElementById('inputPlatterPrice').value.trim(),
+                empanadaPrice: document.getElementById('inputEmpanadaPrice').value.trim(),
+                sidePrice: document.getElementById('inputSidePrice').value.trim(),
+                proteins: parsedProteins,
+                sides: parsedSides,
+                pastelitos: parsedPastelitos,
+                orderWindow: document.getElementById('inputOrderWindow').value.trim(),
+                contact: document.getElementById('inputContact').value.trim()
+            };
+
+            localStorage.setItem('a1_weekly_special', JSON.stringify(currentMenu));
+            renderMenu();
+            closeAdminModal();
+            showToast('Weekly Special & image paths updated!');
+        }
+
+        function resetDefaultMenu() {
+            currentMenu = JSON.parse(JSON.stringify(DEFAULT_MENU));
+            localStorage.setItem('a1_weekly_special', JSON.stringify(currentMenu));
+            renderMenu();
+            closeAdminModal();
+            showToast('Reset to default Sunday Menu');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function escapeHtml(str) {
+            return (str || '').replace(/&/g, "&amp;")
+                              .replace(/</g, "&lt;")
+                              .replace(/>/g, "&gt;")
+                              .replace(/"/g, "&quot;")
+                              .replace(/'/g, "&#039;");
+        }
+
+        window.onload = function() {
+            loadMenu();
+        };
+    </script>
+<!-- ... existing code -->
