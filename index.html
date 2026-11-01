@@ -54,7 +54,8 @@
     <header class="bg-white border-b border-rose-100 sticky top-0 z-30 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="bg-brandPink p-2 rounded-full text-brandRose font-bold text-xl flex items-center justify-center w-10 h-10 border border-rose-200 shadow-sm">
+                <!-- 3-Click Target: Logo badge -->
+                <div id="secretAdminTrigger" class="bg-brandPink p-2 rounded-full text-brandRose font-bold text-xl flex items-center justify-center w-10 h-10 border border-rose-200 shadow-sm cursor-pointer select-none" title="Click 3 times">
                     A1
                 </div>
                 <div>
@@ -65,7 +66,8 @@
 
             <!-- Header Actions -->
             <div class="flex items-center space-x-3">
-                <button id="toggleAdminBtn" onclick="openAdminModal()" class="flex items-center space-x-1.5 bg-brandPink hover:bg-rose-200 text-brandRose px-3.5 py-2 rounded-lg text-sm font-semibold transition shadow-sm border border-rose-200">
+                <!-- Hidden by default via 'hidden' class -->
+                <button id="toggleAdminBtn" onclick="openAdminModal()" class="hidden flex items-center space-x-1.5 bg-brandPink hover:bg-rose-200 text-brandRose px-3.5 py-2 rounded-lg text-sm font-semibold transition shadow-sm border border-rose-200">
                     <i class="ph ph-pencil-line text-lg"></i>
                     <span class="hidden md:inline">Edit Weekly Special</span>
                     <span class="md:hidden">Edit Special</span>
@@ -90,9 +92,12 @@
                 <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Savor the Flavor of Puerto Rico & Soul Food</h2>
                 <p class="text-emerald-100 text-sm mt-1 max-w-2xl">Order your weekly dinner platters or book catering for your next family event, party, or corporate function!</p>
             </div>
-            <div class="z-10 flex-shrink-0 flex gap-2">
+            <div class="z-10 flex-shrink-0 flex flex-wrap justify-center gap-2">
                 <a href="tel:6317413038" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
                     <i class="ph ph-phone text-lg"></i> (631) 741-3038
+                </a>
+                <a href="https://www.instagram.com/a1treatsandeats/" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+                    <i class="ph ph-instagram-logo text-lg"></i> @A1TREATSANDEATS
                 </a>
             </div>
             <!-- Background Decorative Shape -->
@@ -112,11 +117,6 @@
                     </div>
                     <h2 id="displayTitle" class="text-2xl font-black text-brandRose uppercase tracking-wide">Sunday's Menu</h2>
                     <p class="text-xs text-rose-700 mt-1 font-medium">Limited Availability • Freshly Prepared</p>
-                    
-                    <!-- Quick Edit Trigger in Section Header -->
-                    <button onclick="openAdminModal()" title="Edit Special Menu" class="absolute top-4 right-4 text-brandRose hover:text-rose-800 p-1 rounded-lg hover:bg-rose-200/50 transition">
-                        <i class="ph ph-pencil-simple text-xl"></i>
-                    </button>
                 </div>
 
                 <div class="p-5 sm:p-6 space-y-6">
@@ -147,7 +147,7 @@
                             <h3 class="font-bold text-brandGreen uppercase text-sm tracking-wider">Protein Options</h3>
                         </div>
                         <ul id="displayProteins" class="space-y-3 text-sm text-gray-700">
-                            <!-- Populated via JS with thumbnail image links -->
+                            <!-- Populated via JS -->
                         </ul>
                     </div>
 
@@ -158,28 +158,6 @@
                             <h3 class="font-bold text-brandGreen uppercase text-sm tracking-wider">Sides</h3>
                         </div>
                         <ul id="displaySides" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
-                            <!-- Populated via JS with thumbnail image links -->
-                        </ul>
-                    </div>
-
-                    <!-- Pastelitos Section -->
-                    <div>
-                        <div class="flex items-center space-x-2 border-b border-rose-100 pb-2 mb-3">
-                            <i class="ph ph-cookie text-brandRose text-xl"></i>
-                            <h3 class="font-bold text-brandGreen uppercase text-sm tracking-wider">Pastelitos / Empanadas</h3>
-                        </div>
-                        <ul id="displayPastelitos" class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-gray-700">
-                            <!-- Populated via JS with thumbnail image links -->
-                        </ul>
-                    </div>
-
-                    <!-- Sides Section -->
-                    <div>
-                        <div class="flex items-center space-x-2 border-b border-rose-100 pb-2 mb-3">
-                            <i class="ph ph-bowl-food text-brandRose text-xl"></i>
-                            <h3 class="font-bold text-brandGreen uppercase text-sm tracking-wider">Sides</h3>
-                        </div>
-                        <ul id="displaySides" class="grid grid-cols-2 gap-2 text-sm text-gray-700">
                             <!-- Populated via JS -->
                         </ul>
                     </div>
@@ -190,7 +168,7 @@
                             <i class="ph ph-cookie text-brandRose text-xl"></i>
                             <h3 class="font-bold text-brandGreen uppercase text-sm tracking-wider">Pastelitos / Empanadas</h3>
                         </div>
-                        <ul id="displayPastelitos" class="flex flex-wrap gap-2 text-sm text-gray-700">
+                        <ul id="displayPastelitos" class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-gray-700">
                             <!-- Populated via JS -->
                         </ul>
                     </div>
@@ -400,34 +378,22 @@
                     </div>
                 </div>
 
-                <!-- Proteins (One per line) -->
+                <!-- Proteins -->
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Proteins (Format: Name | Description | image_filename.jpg)</label>
-                    <textarea id="inputProteins" rows="4" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none font-mono" placeholder="Pernil | Pulled Pork Shoulder | pernil.jpg&#10;Chicharrón de pollo | Fried Chicken Chunks | chicharron.jpg"></textarea>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Proteins (Format: Name | Description | image.jpg - optional)</label>
+                    <textarea id="inputProteins" rows="4" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none font-mono" placeholder="Pernil | Pulled Pork Shoulder | pernil.jpg"></textarea>
                 </div>
 
-                <!-- Sides (One per line) -->
+                <!-- Sides -->
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Sides (Format: Name | image_filename.jpg)</label>
-                    <textarea id="inputSides" rows="4" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none font-mono" placeholder="Arroz Con Gandules | arroz-con-gandules.jpg&#10;White Rice | white-rice.jpg"></textarea>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Sides (Format: Name | image.jpg - optional)</label>
+                    <textarea id="inputSides" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none font-mono" placeholder="Arroz Con Gandules | arroz-con-gandules.jpg"></textarea>
                 </div>
 
-                <!-- Pastelitos (One per line) -->
+                <!-- Pastelitos -->
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Pastelitos (Format: Name | image_filename.jpg)</label>
-                    <textarea id="inputPastelitos" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none font-mono" placeholder="Beef | beef-pastelito.jpg&#10;Chicken | chicken-pastelito.jpg"></textarea>
-                </div>
-
-                <!-- Sides (One per line) -->
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Sides (One item per line)</label>
-                    <textarea id="inputSides" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none font-mono" placeholder="Arroz Con Gandules&#10;White Rice&#10;Yuca Con Mojo"></textarea>
-                </div>
-
-                <!-- Pastelitos (One per line) -->
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Pastelitos (One item per line)</label>
-                    <textarea id="inputPastelitos" rows="2" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none font-mono" placeholder="Beef&#10;Chicken&#10;Pernil (Request Cheese)"></textarea>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Pastelitos (Format: Name | image.jpg - optional)</label>
+                    <textarea id="inputPastelitos" rows="2" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brandRose focus:outline-none font-mono" placeholder="Beef | pastelito-beef.jpg"></textarea>
                 </div>
 
                 <!-- Ordering Window & Contact -->
@@ -509,7 +475,7 @@
             renderMenu();
         }
 
-        // Render Data into DOM
+        // Render Data into DOM with Hover Zoom Effect & Fallback Safety
         function renderMenu() {
             document.getElementById('displayTitle').innerText = currentMenu.title || "Sunday's Menu";
             document.getElementById('displayPlatterPrice').innerText = currentMenu.platterPrice || "$20 Platter";
@@ -518,60 +484,44 @@
             document.getElementById('displayOrderWindow').innerText = currentMenu.orderWindow || "Mon - Fri 6PM";
             document.getElementById('displayContact').innerText = currentMenu.contact || "DM or Text (631) 741-3038";
 
-            // Helper to generate fallback placeholder UI when image isn't loaded yet
-            const getImgHtml = (src, alt) => {
-                const placeholder = `https://placehold.co/120x120/f9e5e3/c05c65?text=${encodeURIComponent(alt)}`;
-                return `<img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" onerror="this.onerror=null;this.src='${placeholder}';" class="w-14 h-14 object-cover rounded-lg border border-rose-200 flex-shrink-0 shadow-sm">`;
-            };
+            // Helper to check if image path is valid
+            const hasImg = (img) => img && img.trim() !== '' && img.trim() !== 'undefined' && img.trim() !== 'null';
 
             // Render Proteins
-            const proteinsContainer = document.getElementById('displayProteins');
-            proteinsContainer.innerHTML = '';
-            (currentMenu.proteins || []).forEach(item => {
-                const li = document.createElement('li');
-                li.className = 'bg-rose-50/60 p-2.5 rounded-xl border border-rose-100/70 flex items-center space-x-3 shadow-sm';
-                li.innerHTML = `
-                    ${getImgHtml(item.img || 'protein.jpg', item.name)}
-                    <div>
-                        <div class="font-bold text-brandGreen leading-tight">${escapeHtml(item.name)}</div>
-                        ${item.desc ? `<div class="text-xs text-gray-500 mt-0.5">${escapeHtml(item.desc)}</div>` : ''}
+            const protContainer = document.getElementById('displayProteins');
+            const proteinsList = currentMenu.proteins && currentMenu.proteins.length > 0 ? currentMenu.proteins : DEFAULT_MENU.proteins;
+            protContainer.innerHTML = proteinsList.map(p => `
+                <li class="bg-gray-50 border border-gray-100 p-3 rounded-xl flex items-center justify-between gap-3">
+                    <div class="flex flex-col justify-center">
+                        <span class="font-bold text-brandGreen text-base">${p.name || ''}</span>
+                        <span class="text-xs text-gray-500 mt-0.5">${p.desc || ''}</span>
                     </div>
-                `;
-                proteinsContainer.appendChild(li);
-            });
+                    ${hasImg(p.img) ? `<div class="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 border border-gray-200 shadow-sm"><img src="${p.img.trim()}" alt="${p.name || 'Food'}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-125"></div>` : ''}
+                </li>
+            `).join('');
 
             // Render Sides
             const sidesContainer = document.getElementById('displaySides');
-            sidesContainer.innerHTML = '';
-            (currentMenu.sides || []).forEach(side => {
-                const sideName = typeof side === 'object' ? side.name : side;
-                const sideImg = typeof side === 'object' ? side.img : `${sideName.toLowerCase().replace(/\s+/g, '-')}.jpg`;
-                const li = document.createElement('li');
-                li.className = 'bg-gray-50 p-2 rounded-xl border border-gray-200/70 flex items-center space-x-2.5';
-                li.innerHTML = `
-                    ${getImgHtml(sideImg, sideName)}
-                    <span class="font-semibold text-xs text-gray-800">${escapeHtml(sideName)}</span>
-                `;
-                sidesContainer.appendChild(li);
-            });
+            const sidesList = currentMenu.sides && currentMenu.sides.length > 0 ? currentMenu.sides : DEFAULT_MENU.sides;
+            sidesContainer.innerHTML = sidesList.map(s => `
+                <li class="bg-gray-50 border border-gray-100 p-2.5 rounded-xl flex items-center justify-between gap-2">
+                    <span class="font-medium text-gray-700 text-xs">${s.name || ''}</span>
+                    ${hasImg(s.img) ? `<div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 border border-gray-200 shadow-sm"><img src="${s.img.trim()}" alt="${s.name || 'Side'}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-125"></div>` : ''}
+                </li>
+            `).join('');
 
             // Render Pastelitos
-            const pastelitosContainer = document.getElementById('displayPastelitos');
-            pastelitosContainer.innerHTML = '';
-            (currentMenu.pastelitos || []).forEach(pas => {
-                const pasName = typeof pas === 'object' ? pas.name : pas;
-                const pasImg = typeof pas === 'object' ? pas.img : `pastelito-${pasName.toLowerCase().replace(/\s+/g, '-')}.jpg`;
-                const li = document.createElement('li');
-                li.className = 'bg-rose-50/80 p-2 rounded-xl border border-rose-200 flex items-center space-x-2.5';
-                li.innerHTML = `
-                    ${getImgHtml(pasImg, pasName)}
-                    <span class="font-bold text-xs text-brandRose">${escapeHtml(pasName)}</span>
-                `;
-                pastelitosContainer.appendChild(li);
-            });
+            const pastelContainer = document.getElementById('displayPastelitos');
+            const pastelList = currentMenu.pastelitos && currentMenu.pastelitos.length > 0 ? currentMenu.pastelitos : DEFAULT_MENU.pastelitos;
+            pastelContainer.innerHTML = pastelList.map(pt => `
+                <li class="bg-gray-50 border border-gray-100 p-2.5 rounded-xl flex flex-col items-center text-center gap-2">
+                    ${hasImg(pt.img) ? `<div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border border-gray-200 shadow-sm"><img src="${pt.img.trim()}" alt="${pt.name || 'Pastelito'}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-125"></div>` : ''}
+                    <span class="font-medium text-gray-700 text-xs">${pt.name || ''}</span>
+                </li>
+            `).join('');
         }
 
-        // Admin Modal Actions
+        // Modal Controls
         function openAdminModal() {
             document.getElementById('inputTitle').value = currentMenu.title || '';
             document.getElementById('inputPlatterPrice').value = currentMenu.platterPrice || '';
@@ -580,20 +530,15 @@
             document.getElementById('inputOrderWindow').value = currentMenu.orderWindow || '';
             document.getElementById('inputContact').value = currentMenu.contact || '';
 
-            // Format proteins back into editable lines
-            document.getElementById('inputProteins').value = (currentMenu.proteins || [])
-                .map(p => `${p.name} | ${p.desc || ''} | ${p.img || ''}`)
-                .join('\n');
-
-            // Format sides back into editable lines
-            document.getElementById('inputSides').value = (currentMenu.sides || [])
-                .map(s => typeof s === 'object' ? `${s.name} | ${s.img || ''}` : `${s} | ${s.toLowerCase().replace(/\s+/g, '-')}.jpg`)
-                .join('\n');
-
-            // Format pastelitos back into editable lines
-            document.getElementById('inputPastelitos').value = (currentMenu.pastelitos || [])
-                .map(p => typeof p === 'object' ? `${p.name} | ${p.img || ''}` : `${p} | pastelito-${p.toLowerCase().replace(/\s+/g, '-')}.jpg`)
-                .join('\n');
+            // Format textareas for admin editing
+            const protData = currentMenu.proteins || DEFAULT_MENU.proteins;
+            document.getElementById('inputProteins').value = protData.map(p => `${p.name || ''} | ${p.desc || ''} | ${p.img || ''}`).join('\n');
+            
+            const sidesData = currentMenu.sides || DEFAULT_MENU.sides;
+            document.getElementById('inputSides').value = sidesData.map(s => `${s.name || ''} | ${s.img || ''}`).join('\n');
+            
+            const pastelData = currentMenu.pastelitos || DEFAULT_MENU.pastelitos;
+            document.getElementById('inputPastelitos').value = pastelData.map(pt => `${pt.name || ''} | ${pt.img || ''}`).join('\n');
 
             document.getElementById('adminModal').classList.remove('hidden');
         }
@@ -602,67 +547,77 @@
             document.getElementById('adminModal').classList.add('hidden');
         }
 
-        // Save Form Data
+        // Save Form Data with robust parsing
         function saveSpecialMenu(e) {
             e.preventDefault();
 
+            const title = document.getElementById('inputTitle').value;
+            const platterPrice = document.getElementById('inputPlatterPrice').value;
+            const empanadaPrice = document.getElementById('inputEmpanadaPrice').value;
+            const sidePrice = document.getElementById('inputSidePrice').value;
+            const orderWindow = document.getElementById('inputOrderWindow').value;
+            const contact = document.getElementById('inputContact').value;
+
             // Parse Proteins
-            const rawProteins = document.getElementById('inputProteins').value.trim().split('\n');
-            const parsedProteins = rawProteins.filter(line => line.trim()).map(line => {
+            const rawProt = document.getElementById('inputProteins').value;
+            const proteins = rawProt.split('\n').filter(line => line.trim() !== '').map(line => {
                 const parts = line.split('|');
                 return {
-                    name: parts[0] ? parts[0].trim() : '',
+                    name: parts[0] ? parts[0].trim() : 'Item',
                     desc: parts[1] ? parts[1].trim() : '',
-                    img: parts[2] ? parts[2].trim() : (parts[0] ? `${parts[0].trim().toLowerCase().replace(/\s+/g, '-')}.jpg` : 'food.jpg')
+                    img: parts[2] ? parts[2].trim() : ''
                 };
             });
 
             // Parse Sides
-            const rawSides = document.getElementById('inputSides').value.trim().split('\n');
-            const parsedSides = rawSides.filter(line => line.trim()).map(line => {
+            const rawSides = document.getElementById('inputSides').value;
+            const sides = rawSides.split('\n').filter(line => line.trim() !== '').map(line => {
                 const parts = line.split('|');
                 return {
-                    name: parts[0] ? parts[0].trim() : '',
-                    img: parts[1] ? parts[1].trim() : (parts[0] ? `${parts[0].trim().toLowerCase().replace(/\s+/g, '-')}.jpg` : 'side.jpg')
+                    name: parts[0] ? parts[0].trim() : 'Item',
+                    img: parts[1] ? parts[1].trim() : ''
                 };
             });
 
             // Parse Pastelitos
-            const rawPastelitos = document.getElementById('inputPastelitos').value.trim().split('\n');
-            const parsedPastelitos = rawPastelitos.filter(line => line.trim()).map(line => {
+            const rawPastel = document.getElementById('inputPastelitos').value;
+            const pastelitos = rawPastel.split('\n').filter(line => line.trim() !== '').map(line => {
                 const parts = line.split('|');
                 return {
-                    name: parts[0] ? parts[0].trim() : '',
-                    img: parts[1] ? parts[1].trim() : (parts[0] ? `pastelito-${parts[0].trim().toLowerCase().replace(/\s+/g, '-')}.jpg` : 'pastelito.jpg')
+                    name: parts[0] ? parts[0].trim() : 'Item',
+                    img: parts[1] ? parts[1].trim() : ''
                 };
             });
 
             currentMenu = {
-                title: document.getElementById('inputTitle').value.trim(),
-                platterPrice: document.getElementById('inputPlatterPrice').value.trim(),
-                empanadaPrice: document.getElementById('inputEmpanadaPrice').value.trim(),
-                sidePrice: document.getElementById('inputSidePrice').value.trim(),
-                proteins: parsedProteins,
-                sides: parsedSides,
-                pastelitos: parsedPastelitos,
-                orderWindow: document.getElementById('inputOrderWindow').value.trim(),
-                contact: document.getElementById('inputContact').value.trim()
+                title,
+                platterPrice,
+                empanadaPrice,
+                sidePrice,
+                proteins,
+                sides,
+                pastelitos,
+                orderWindow,
+                contact
             };
 
             localStorage.setItem('a1_weekly_special', JSON.stringify(currentMenu));
             renderMenu();
             closeAdminModal();
-            showToast('Weekly Special & image paths updated!');
+            showToast("Weekly special menu updated successfully!");
         }
 
         function resetDefaultMenu() {
-            currentMenu = JSON.parse(JSON.stringify(DEFAULT_MENU));
-            localStorage.setItem('a1_weekly_special', JSON.stringify(currentMenu));
-            renderMenu();
-            closeAdminModal();
-            showToast('Reset to default Sunday Menu');
+            if (confirm("Reset menu to default Sunday special?")) {
+                currentMenu = { ...DEFAULT_MENU };
+                localStorage.removeItem('a1_weekly_special');
+                renderMenu();
+                closeAdminModal();
+                showToast("Menu reset to default!");
+            }
         }
 
+        // Toast Notification Helper
         function showToast(msg) {
             const toast = document.getElementById('toast');
             document.getElementById('toastMsg').innerText = msg;
@@ -672,16 +627,27 @@
             }, 3000);
         }
 
-        function escapeHtml(str) {
-            return (str || '').replace(/&/g, "&amp;")
-                              .replace(/</g, "&lt;")
-                              .replace(/>/g, "&gt;")
-                              .replace(/"/g, "&quot;")
-                              .replace(/'/g, "&#039;");
-        }
+        // Secret 3-Click Toggle for Edit Weekly Special Button
+        let clickCount = 0;
+        let clickTimer = null;
+        document.getElementById('secretAdminTrigger').addEventListener('click', () => {
+            clickCount++;
+            clearTimeout(clickTimer);
+            
+            if (clickCount === 3) {
+                const adminBtn = document.getElementById('toggleAdminBtn');
+                adminBtn.classList.toggle('hidden');
+                showToast(adminBtn.classList.contains('hidden') ? "Edit button hidden!" : "Edit button revealed!");
+                clickCount = 0;
+            } else {
+                clickTimer = setTimeout(() => {
+                    clickCount = 0;
+                }, 600);
+            }
+        });
 
-        window.onload = function() {
-            loadMenu();
-        };
+        // Run on load
+        window.addEventListener('DOMContentLoaded', loadMenu);
     </script>
-<!-- ... existing code -->
+</body>
+</html>
